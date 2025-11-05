@@ -1,4 +1,4 @@
-# MediaWiki DevOps Environment (v1)
+# MediaWiki Project with PostgreSQL (v1)
 
 This repository provides a local DevOps environment for running [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) with a PostgreSQL database.
 
