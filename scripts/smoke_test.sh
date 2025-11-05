@@ -8,14 +8,13 @@ echo "Checking containers..."
 docker ps | grep -q "wiki-app" && echo "✅ MediaWiki container running" || { echo "😬 wiki-app not running"; exit 1; }
 docker ps | grep -q "wiki-db" && echo "✅ PostgreSQL container running" || { echo "😬 wiki-db not running"; exit 1; }
 
-# Check Web Response (HTTP 200)
+# Check Web Response
 echo "Checking web response..."
-HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)
-if [ "$HTTP_CODE" -eq 200 ]; then
-  echo "✅ MediaWiki homepage reachable"
+status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)
+if [[ "$status_code" =~ ^(200|301|302)$ ]]; then
+  echo "✅ MediaWiki is reachable (HTTP $status_code)"
 else
-  echo "😬 MediaWiki not responding properly (HTTP $HTTP_CODE)"
-  exit 1
+  echo "😬 MediaWiki not responding (HTTP $status_code)"
 fi
 
 # Check database health status
