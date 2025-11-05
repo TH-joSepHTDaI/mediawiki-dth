@@ -4,6 +4,8 @@
 # Application data
 db-data/
 mediawiki-data/
+logs/
+configs/postgres/
 
 # System files
 *.log
