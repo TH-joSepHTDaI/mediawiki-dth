@@ -2,11 +2,11 @@
 
 init:
 	@echo "Preparing environment folders..."
-	mkdir -p db-data mediawiki-data logs/mediawiki logs/postgres configs/postgres
+	mkdir -p db-data mediawiki-data logs/mediawiki logs/postgres configs
 	@echo "Environment ready."
 
 up:
-	docker-compose up -d
+	docker-compose up -d --build
 
 down:
 	docker-compose down

@@ -93,4 +93,5 @@ make clean
 
 | Version | Description |
 |----------|-------------|
-| **v1** | Local DevOps environment (Docker Compose, Makefile, Healthcheck, Smoke Test) |
+| **v0** | Local Basic Version |
+| **v1** | PostgreSQL Extension & Logging |
