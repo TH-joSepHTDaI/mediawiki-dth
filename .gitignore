@@ -1,0 +1,14 @@
+# Local environment config
+.env
+
+# Application data
+db-data/
+mediawiki-data/
+
+# System files
+*.log
+*.tmp
+.DS_Store
+
+# Docker artifacts
+*.pid

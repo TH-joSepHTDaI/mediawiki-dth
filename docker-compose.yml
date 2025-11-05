@@ -1,0 +1,41 @@
+# MediaWiki with Postgres
+#
+# Access via "http://localhost:8080"
+
+services:
+  mediawiki:
+    image: mediawiki:${MEDIAWIKI_VERSION}
+    container_name: wiki-app
+    restart: always
+    ports:
+      - 8080:80
+    links:
+      - database
+    volumes:
+      - images:/var/www/html/images
+      # After initial setup, download LocalSettings.php to the same directory as
+      # this yaml and uncomment the following line and use compose to restart
+      # the mediawiki service
+      # - ./LocalSettings.php:/var/www/html/LocalSettings.php
+    environment:
+      MEDIAWIKI_DB_TYPE: postgres
+      MEDIAWIKI_DB_HOST: database
+      MEDIAWIKI_DB_NAME: ${POSTGRES_DB}
+      MEDIAWIKI_DB_USER: ${POSTGRES_USER}
+      MEDIAWIKI_DB_PASSWORD: ${POSTGRES_PASSWORD}
+
+  database:
+    image: postgres:${POSTGRES_VERSION}
+    container_name: wiki-db
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+
+volumes:
+  images:
+  db-data:
