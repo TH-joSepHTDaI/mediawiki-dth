@@ -16,14 +16,19 @@ The goal of this version (v1) is to demonstrate:
 ├── Makefile # Automation entry point (up, down, logs, test...)
 ├── .env # Environment variables
 ├── configs
-│   └── postgres
-│       └── postgresql.conf # Custom PostgreSQL configuration (logging enabled)
 ├── db-data # Persistent database volume
 ├── docker-compose.yml # Defines services: MediaWiki + PostgreSQL
 ├── logs
 │   ├── mediawiki # Apache/MediaWiki logs
 │   └── postgres # PostgreSQL logs
 ├── mediawiki-data # Persistent MediaWiki volume
+├── mediawiki
+│   └── Dockerfile # Extended MediaWiki image with custom Dockerfile
+├── postgres
+│   ├── configs # Apache/MediaWiki logs
+│   │    └── postgresql.conf # Custom PostgreSQL configuration
+│   └── Dockerfile # Extended Postgres image with custom Dockerfile
+├── LocalSettings.php # Wiki project settings
 └── scripts
     ├── healthcheck.sh # Container health verification script
     └── smoke_test.sh # Automated smoke test for web + DB availability
@@ -91,6 +96,7 @@ make clean
 
 ## 📅 Version History
 
-| Version | Description |
-|----------|-------------|
-| **v1** | Local DevOps environment (Docker Compose, Makefile, Healthcheck, Smoke Test) |
+| Version | Description | Key Changes | 
+|---------|-------------|---------------|
+| **v0** | Local Basic Version | Basic Docker Compose setup with MediaWiki and PostgreSQL services; MediaWiki successfully running on localhost (http://localhost:8080). |
+| **v1** | PostgreSQL Extension & Logging | Extended MediaWiki image with custom Dockerfile to include PostgreSQL PHP extensions; Enabled PostgreSQL file logging via logging_collector and mounted logs to local path. |
