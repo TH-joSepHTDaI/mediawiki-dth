@@ -32,3 +32,6 @@ status:
 
 check:
 	bash scripts/healthcheck.sh
+
+test:
+	bash scripts/smoke_test.sh
