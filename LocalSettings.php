@@ -90,7 +90,7 @@ $wgUseInstantCommons = false;
 $wgPingback = true;
 
 # Site language code, should be one of the list in ./includes/languages/data/Names.php
-$wgLanguageCode = "zh-cn";
+$wgLanguageCode = "en";
 
 # Time zone
 $wgLocaltimezone = "UTC";
@@ -100,14 +100,14 @@ $wgLocaltimezone = "UTC";
 ## be publicly accessible from the web.
 #$wgCacheDirectory = "$IP/cache";
 
-$wgSecretKey = "a4800775b78dda33e2b1e971fb5e00adc20c04b0387bdc4e36468edf38c9e83b";
+$wgSecretKey = "4ec59631fbace7da3ff6470161c1451cc8f0ef15d1ae90b99212cc7457f447c3";
 
 # Changing this will log out all existing sessions.
 $wgAuthenticationTokenVersion = "1";
 
 # Site upgrade key. Must be set to a string (default provided) to turn on the
 # web installer while LocalSettings.php is in place
-$wgUpgradeKey = "b73a0684091a720a";
+$wgUpgradeKey = "aa6828c216e2f5f4";
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation
@@ -131,6 +131,8 @@ wfLoadSkin( 'MonoBook' );
 wfLoadSkin( 'Timeless' );
 wfLoadSkin( 'Vector' );
 
+# Enabled extensions.
+wfLoadExtension( 'CategoryTree' );
 
 # End of automatically generated settings.
 # Add more configuration options below.

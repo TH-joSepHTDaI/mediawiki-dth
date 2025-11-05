@@ -100,3 +100,5 @@ make clean
 |---------|-------------|---------------|
 | **v0** | Local Basic Version | Basic Docker Compose setup with MediaWiki and PostgreSQL services; MediaWiki successfully running on localhost (http://localhost:8080). |
 | **v1** | PostgreSQL Extension & Logging | Extended MediaWiki image with custom Dockerfile to include PostgreSQL PHP extensions; Enabled PostgreSQL file logging via logging_collector and mounted logs to local path. |
+| **v1.1** | CategoryTree Extension Integration | Added automatic installation of the MediaWiki CategoryTree (REL1_44) extension through the Docker build process; Check installed extensions on (http://localhost:8080/index.php/Special:Version) |
+
