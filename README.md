@@ -105,7 +105,7 @@ make clean
 
 | Version | Description | Key Changes | 
 |---------|-------------|---------------|
-| **v0** | Local Basic Version | - Basic Docker Compose setup with MediaWiki and PostgreSQL services.<br> - MediaWiki successfully running on localhost (http://localhost:8080). |
-| **v1** | PostgreSQL Extension & Logging | - Extended MediaWiki image with custom Dockerfile to include PostgreSQL PHP extensions.<br> - Fetched and mounted PostgreSQL logs to local path.<br> - Added health check and smoke test.|
+| **v0** | Local Basic Version | - Basic Docker Compose setup with MediaWiki and PostgreSQL services.<br> - MediaWiki successfully running on localhost (http://localhost:8080).<br> - Implemented Makefile, basic tests and logging function. |
+| **v1** | PostgreSQL Extension & Logging | - Extended MediaWiki image with custom Dockerfile to include PostgreSQL PHP extensions.<br> - Fetched and mounted PostgreSQL logs to local path.|
 | **v1.1** | CategoryTree Extension Integration | - Added installation of the CategoryTree (REL1_44) extension through the Docker build process.<br> - Check installed extensions on (http://localhost:8080/index.php/Special:Version) |
 | **v2** | Nginx Reverse Proxy + SSL Integration | - Added a Nginx service to act as a reverse proxy for MediaWiki, handling all HTTP/HTTPS traffic.<br> - Configured self-signed SSL certificates for local HTTPS access at (https://media-wiki.example.com).<br> - Modified `LocalSettings.php` to recognize HTTPS behind the proxy and fix redirect issues. |
