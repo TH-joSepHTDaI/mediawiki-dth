@@ -18,7 +18,7 @@ The goal of this version (v2) is to demonstrate a more production-like setup tha
 ├── .env # Environment variables
 ├── configs
 ├── db-data # Persistent database volume
-├── docker-compose.yml # Defines services: MediaWiki + PostgreSQL
+├── docker-compose.yml # Defines services: Nginx + MediaWiki + PostgreSQL
 ├── nginx/
 │   ├── default.conf
 │   └── ssl/
