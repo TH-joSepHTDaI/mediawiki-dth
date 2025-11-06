@@ -2,7 +2,7 @@
 
 init:
 	@echo "Preparing environment folders..."
-	mkdir -p db-data mediawiki-data logs/mediawiki logs/postgres configs
+	mkdir -p db-data mediawiki-data logs/mediawiki logs/postgres logs/nginx configs
 	@echo "Environment ready."
 
 up:
