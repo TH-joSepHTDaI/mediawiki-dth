@@ -26,6 +26,7 @@ The goal of this version (v2) is to demonstrate a more production-like setup tha
 │       └── server.key
 ├── logs
 │   ├── mediawiki # Apache/MediaWiki logs
+│   ├── nginx # Nginx logs
 │   └── postgres # PostgreSQL logs
 ├── mediawiki-data # Persistent MediaWiki volume
 ├── mediawiki
