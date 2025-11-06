@@ -66,7 +66,7 @@ This creates required directories (db-data, logs, configs, mediawiki-data) for p
 make up
 ```
 Access the MediaWiki homepage at: 
-[http://localhost:8080](http://localhost:8080)
+[https://media-wiki.example.com](https://media-wiki.example.com)
 
 ### 3. View logs
 ```bash
