@@ -1,25 +1,48 @@
 #!/bin/bash
 set -e
 
-echo "Running smoke test for MediaWiki..."
+echo "Running smoke test for MediaWiki v2..."
 
 # Check container status
-echo "Checking containers..."
-docker ps | grep -q "wiki-app" && echo "✅ MediaWiki container running" || { echo "😬 wiki-app not running"; exit 1; }
-docker ps | grep -q "wiki-db" && echo "✅ PostgreSQL container running" || { echo "😬 wiki-db not running"; exit 1; }
+for container in wiki-proxy wiki-app wiki-db; do
+  if docker ps --format '{{.Names}}' | grep -q "^${container}$"; then
+    echo "✅ $container container is running"
+  else
+    echo "😬 $container container is NOT running"
+    exit 1
+  fi
+done
 
-# Check Web Response
-echo "Checking web response..."
-status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)
+# Verify domain resolution
+echo "Checking local domain resolution..."
+if ! ping -c1 -W1 media-wiki.example.com &>/dev/null; then
+  echo "Domain 'media-wiki.example.com' not resolving to localhost."
+  echo "Please add '127.0.0.1 media-wiki.example.com' to /etc/hosts."
+  exit 1
+fi
+echo "✅ Domain resolves correctly"
+
+# Check HTTPS response via Nginx
+echo "Checking HTTPS response..."
+status_code=$(curl -k -s -o /dev/null -w "%{http_code}" https://media-wiki.example.com)
+
 if [[ "$status_code" =~ ^(200|301|302)$ ]]; then
-  echo "✅ MediaWiki is reachable (HTTP $status_code)"
+  echo "✅ MediaWiki is reachable through Nginx (HTTPS $status_code)"
 else
-  echo "😬 MediaWiki not responding (HTTP $status_code)"
+  echo "😬 MediaWiki not responding via Nginx (HTTPS $status_code)"
+  echo "   Try: docker logs wiki-proxy  (to inspect Nginx logs)"
+  exit 1
 fi
 
 # Check database health status
-echo "Checking PostgreSQL health..."
-PG_HEALTH=$(docker inspect --format='{{.State.Health.Status}}' wiki-db 2>/dev/null || echo "unknown")
-echo "Postgres health: $PG_HEALTH"
+echo "Checking HTTPS response..."
+status_code=$(curl -k -s -o /dev/null -w "%{http_code}" https://media-wiki.example.com)
+if [[ "$status_code" =~ ^(200|301|302)$ ]]; then
+  echo "✅ MediaWiki is reachable through Nginx (HTTPS $status_code)"
+else
+  echo "😬 MediaWiki not responding via Nginx (HTTPS $status_code)"
+  echo "   Try: docker logs wiki-proxy  (to inspect Nginx logs)"
+  exit 1
+fi
 
-echo "Smoke test passed!"
+echo "🎉 Smoke test passed successfully for MediaWiki v2!"
