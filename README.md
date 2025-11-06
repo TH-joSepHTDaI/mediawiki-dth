@@ -1,11 +1,12 @@
-# MediaWiki Project with PostgreSQL (v1)
+# MediaWiki Project with PostgreSQL and Nginx (v2)
 
-This repository provides a local DevOps environment for running [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) with a PostgreSQL database.
+This repository provides a reproducible DevOps environment for running [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) with a PostgreSQL database and an Nginx reverse proxy.
 
-The goal of this version (v1) is to demonstrate:
-- Reproducible environment setup via Docker Compose  
-- Automation through Makefile commands  
-- Observability (logs, healthcheck, smoke tests)  
+The goal of this version (v2) is to demonstrate a more production-like setup that includes:
+- **Reproducible environment setup** via Docker Compose  
+- **Secure HTTPS access** through Nginx reverse proxy with SSL  
+- **Environment automation** using Makefile commands  
+- **Observability** via container logs, health checks, and smoke tests
 
 ---
 
