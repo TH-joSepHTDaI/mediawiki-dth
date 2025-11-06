@@ -31,7 +31,16 @@ $wgSitename = "Test_WIKI";
 $wgScriptPath = "";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = "http://localhost:8080";
+// $wgServer = "http://localhost:8080";
+
+# --- Reverse Proxy & HTTPS Fix ---
+$wgServer = "https://media-wiki.example.com";
+$wgCanonicalServer = $wgServer;
+
+// # If behind Nginx SSL proxy, tell MediaWiki that HTTPS is active
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+    $_SERVER['HTTPS'] = 'on';
+}
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;

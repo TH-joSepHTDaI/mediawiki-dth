@@ -5,6 +5,20 @@
 # ==========================================================
 
 services:
+  
+  nginx:
+    image: nginx:latest
+    container_name: wiki-proxy
+    restart: always
+    ports:
+      - "80:80"    # Map host port 80 (HTTP) to container port 80
+      - "443:443"  # Map host port 443 (HTTPS) to container port 443
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro  # Mount custom Nginx config file (read-only)
+      - ./nginx/ssl:/etc/nginx/ssl:ro  # Mount SSL certificates directory (read-only)
+    depends_on:
+      - mediawiki
+
   # --------------------------------------------------------
   # MEDIAWIKI WEB APPLICATION
   # --------------------------------------------------------
@@ -15,9 +29,9 @@ services:
       context: ./mediawiki
     container_name: wiki-app
     restart: always
-    # Map host port to container port
-    ports:
-      - "${MEDIAWIKI_PORT}:80"
+    # Expose container port 80 to other services within the same Docker network
+    expose:
+      - "80"
     # Persistent storage and configuration
     volumes:
       - images:/var/www/html/images  # Store uploaded images outside the container
@@ -38,7 +52,6 @@ services:
     depends_on:
       database:
         condition: service_healthy
-
 
   # --------------------------------------------------------
   # POSTGRESQL DATABASE SERVER
